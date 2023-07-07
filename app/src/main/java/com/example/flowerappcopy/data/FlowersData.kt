@@ -38,7 +38,7 @@ object FlowersData{
         Flowers(
             id = 4,
             name = "Margarita",
-            price = "$19800",
+            price = "19800",
             image = R.drawable.ic_pink_rose_bouquet,
             descr = descr
         ),
