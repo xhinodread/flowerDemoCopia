@@ -13,6 +13,7 @@ import androidx.navigation.navArgument
 import com.example.flowerappcopy.navigation.Actions
 import com.example.flowerappcopy.navigation.Destination
 import com.example.flowerappcopy.ui.screen.DashboardScreen
+import com.example.flowerappcopy.ui.screen.ElquiLigaFutbol
 import com.example.flowerappcopy.ui.screen.LoginLigaFutbolScreen
 import com.example.flowerappcopy.ui.screen.LoginScreen
 import com.example.flowerappcopy.ui.screen.PupularScreen
@@ -56,7 +57,8 @@ fun ComposeApp() {
             }
 
             composable(Destination.HomeLigaFutbol) {
-                PerfilUsuario()
+                //PerfilUsuario()
+                ElquiLigaFutbol()
             }
 
 

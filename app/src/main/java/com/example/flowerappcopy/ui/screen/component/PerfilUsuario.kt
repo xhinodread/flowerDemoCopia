@@ -9,17 +9,22 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
+import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.Green
+import androidx.compose.ui.graphics.Color.Companion.Yellow
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
@@ -32,76 +37,37 @@ fun  PerfilUsuario() {
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.fillMaxWidth()
     ) {
-        ///Text("Perfil de Usuario")
-        Text("ElquiSoft")
-
-        LazyVerticalGrid(
-            columns = GridCells.Fixed(1),
-            horizontalArrangement = Arrangement.spacedBy(6.dp),
+        Text("Perfil de Usuario")
+        AsyncImage(
+            model = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZ4D3xt5q3rk7jjEA1l9wx7nooKnF-hrgy8Vwmg9gRqDIdacN8Os3dhhCvaaKxsOccMHw&usqp=CAU",
+            contentDescription = null,
+            modifier = Modifier.padding(10.dp)
+        )
+        /***/
+        OutlinedTextField(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(ghost_white)
-                .padding(top = 10.dp),
-        ) {
+                .background(Color.White),
+            value = "Nombre",
+            onValueChange = {},
+            placeholder = { "" },
+            label = { "" },
+            colors = TextFieldDefaults.outlinedTextFieldColors(
+                focusedBorderColor = Green,
+                unfocusedBorderColor = Yellow),
+            readOnly = true
+        )
+        /****/
+        OutlinedTextField(
+            value = "",
+            onValueChange = {},
+            label = {Text("Input")},
+            colors = TextFieldDefaults.outlinedTextFieldColors(
+                focusedBorderColor = Green,
+                unfocusedBorderColor = Yellow),
+            readOnly = true
+        )
 
-            val urlImages = listOf<String>(
-                "https://elquisoft.cl/ligaadef/images/1.png",
-                "https://elquisoft.cl/ligaadef/images/2.png",
-                "https://elquisoft.cl/ligaadef/images/3.png",
-                "https://elquisoft.cl/ligaadef/images/4.png",
-                "https://elquisoft.cl/ligaadef/images/5.png",
-                "https://elquisoft.cl/ligaadef/images/6.png",
-                "https://elquisoft.cl/ligaadef/images/7.png",
-                "https://elquisoft.cl/ligaadef/images/8.png",
-                "https://elquisoft.cl/ligaadef/images/9.png",
-                "https://elquisoft.cl/ligaadef/images/10.png",
-            )
-
-            item {
-                LazyRow {
-                    item {
-                        urlImages.map { valor ->
-                            AsyncImage(
-                                model = valor,
-                                contentDescription = null,
-                                modifier = Modifier.padding(10.dp)
-                            )
-                        }
-                        /*****
-                        AsyncImage(
-                        model = "https://elquisoft.cl/ligaadef/images/1.png",
-                        contentDescription = null,
-                        modifier = Modifier.padding(10.dp)
-                        )
-
-                        AsyncImage(
-                        model = "https://elquisoft.cl/ligaadef/images/2.png",
-                        contentDescription = null,
-                        modifier = Modifier.padding(10.dp)
-                        )
-                        AsyncImage(
-                        model = "https://elquisoft.cl/ligaadef/images/3.png",
-                        contentDescription = null,
-                        modifier = Modifier.padding(10.dp)
-                        )
-                        AsyncImage(
-                        model = "https://elquisoft.cl/ligaadef/images/4.png",
-                        contentDescription = null,
-                        modifier = Modifier.padding(10.dp)
-                        )
-                         *****/
-
-                    }
-                }
-            }
-
-            item {
-                Column() {
-                    Spacer(modifier = Modifier.height(10.dp))
-                    MyContent()
-                }
-            }
-        }
     }
 }
 

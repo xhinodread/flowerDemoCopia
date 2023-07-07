@@ -31,17 +31,24 @@ import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.rememberNavController
 import com.example.flowerappcopy.R
 import com.example.flowerappcopy.data.Flowers
 import com.example.flowerappcopy.data.FlowersCarroCompra
 import com.example.flowerappcopy.data.FlowersData
 import com.example.flowerappcopy.navigation.Actions
+import com.example.flowerappcopy.ui.theme.JetPackComposeDemoTheme
 import com.example.flowerappcopy.ui.theme.colorPrimary
 import com.example.flowerappcopy.ui.theme.gray
+import com.example.flowerappcopy.ui.viewmodel.CarroCompraViewModel
 
 @Composable
-fun FlowerCard(flower: Flowers, openProducto: (idProd: Int) -> Unit, carroCantidad:Int =0 ) {
+fun FlowerCard(
+    flower: Flowers, openProducto: (idProd: Int) -> Unit,
+    carroCantidad:Int =0,
+    carroCompraViewModel: CarroCompraViewModel = hiltViewModel()
+) {
     val context = LocalContext.current
 
     Card(
@@ -66,15 +73,14 @@ fun FlowerCard(flower: Flowers, openProducto: (idProd: Int) -> Unit, carroCantid
                             .makeText(context, "Click producto", Toast.LENGTH_SHORT)
                             .show()
                         openProducto(flower.id)
-                    }
-                ,
+                    },
                 bitmap = ImageBitmap.imageResource(id = flower.image),
                 contentDescription = "flower_card"
             )
             Row(modifier = Modifier.padding(top = 20.dp)) {
                 Column(modifier = Modifier.weight(1f)) {
                     Text(
-                        text = if(carroCantidad > 0) "$carroCantidad ${flower.name}" else flower.name ,
+                        text = if (carroCantidad > 0) "$carroCantidad ${flower.name}" else flower.name,
                         style = TextStyle(
                             color = gray,
                             fontSize = 16.sp,
@@ -82,13 +88,14 @@ fun FlowerCard(flower: Flowers, openProducto: (idProd: Int) -> Unit, carroCantid
                         )
                     )
                     Text(
-                        text = flower.price,
+                        text = "$ ${flower.price}.-",
                         style = TextStyle(
                             color = colorPrimary,
                             fontSize = 16.sp,
                             //  fontFamily = FontFamily(Font(R.font.josefin_sans_thin))
                         )
                     )
+                    // Text(flower.id.toString())
                 }
                 Box(
                     modifier = Modifier
@@ -99,23 +106,23 @@ fun FlowerCard(flower: Flowers, openProducto: (idProd: Int) -> Unit, carroCantid
                     contentAlignment = Alignment.TopStart
                 ) {
 
-                    val elModifier = if(carroCantidad > 0)Modifier.width(100.dp)else Modifier
+                    val elModifier = if (carroCantidad > 0) Modifier.width(100.dp) else Modifier
 
                     Row(
                         modifier = elModifier,
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
-                        if(carroCantidad > 0) {
+                        if (carroCantidad > 0) {
                             Icon(
                                 Icons.Default.Remove,
                                 tint = Color.White,
                                 contentDescription = "flower_card_icon",
                                 modifier = Modifier
-                                    .padding( 2.dp)
+                                    .padding(2.dp)
                                     .width(40.dp)
-                                  //  .padding(end= 2.dp)
+                                    //  .padding(end= 2.dp)
                                     .clickable {
-
+                                        carroCompraViewModel.delItem(flower.id)
                                     }
                             )
                         }
@@ -127,12 +134,17 @@ fun FlowerCard(flower: Flowers, openProducto: (idProd: Int) -> Unit, carroCantid
                                 .padding(2.dp)
                                 .width(40.dp)
                                 .clickable {
-                                    FlowersCarroCompra.list.add(flower)
+                                    //FlowersCarroCompra.list.add(flower)
+                                    carroCompraViewModel.setItem(flower)
                                 }
                         )
                     }
                 }
             }
+            if (carroCantidad > 0){
+                Text("$ ${flower.price.toInt().times(carroCantidad)}.-")
+            }
         }
     }
+
 }

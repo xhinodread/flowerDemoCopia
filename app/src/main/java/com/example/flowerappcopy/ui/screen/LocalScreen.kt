@@ -22,7 +22,7 @@ fun LocalScreen() {
             SlidingBanner()
         }
         item {
-          //  MapaLocal()
+            MapaLocal()
         }
         item {
             SlidingBannerLocal()

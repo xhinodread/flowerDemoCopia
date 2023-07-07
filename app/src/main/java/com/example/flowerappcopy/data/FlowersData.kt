@@ -8,14 +8,14 @@ object FlowersData{
         Flowers(
             id = 0,
             name = "Angle",
-            price = "$570.00",
+            price = "15700",
             image = R.drawable.ic_red_rose_bouquet,
             descr = descr
         ),
         Flowers(
             id = 1,
             name = "JannienX",
-            price = "$650.00",
+            price = "16500",
             image = R.drawable.ic_pink_rose_bouquet,
             sub_name = "Flores Lyly y Jannien y Lily ",
             descr = descr
@@ -23,7 +23,7 @@ object FlowersData{
         Flowers(
             id = 2,
             name = "AngleX",
-            price = "$570.00",
+            price = "15700",
             image = R.drawable.ic_red_rose_bouquet ,
             sub_name = "Flores Jannien y Lily ",
             descr = descr
@@ -31,7 +31,28 @@ object FlowersData{
         Flowers(
             id = 3,
             name = "Jannien",
-            price = "$650.00",
+            price = "16500",
+            image = R.drawable.ic_pink_rose_bouquet,
+            descr = descr
+        ),
+        Flowers(
+            id = 4,
+            name = "Margarita",
+            price = "$19800",
+            image = R.drawable.ic_pink_rose_bouquet,
+            descr = descr
+        ),
+        Flowers(
+            id = 5,
+            name = "Jacintos",
+            price = "13400",
+            image = R.drawable.ic_pink_rose_bouquet,
+            descr = descr
+        ),
+        Flowers(
+            id = 6,
+            name = "Rosas",
+            price = "19800",
             image = R.drawable.ic_pink_rose_bouquet,
             descr = descr
         )
