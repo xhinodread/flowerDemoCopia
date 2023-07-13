@@ -11,6 +11,7 @@ import com.example.flowerappcopy.navigation.Destination.Local
 import com.example.flowerappcopy.navigation.Destination.DetalleProducto
 import com.example.flowerappcopy.navigation.Destination.HomeLigaFutbol
 import com.example.flowerappcopy.navigation.Destination.LoginLiga
+import com.example.flowerappcopy.navigation.Destination.Perfil
 import com.example.flowerappcopy.navigation.Destination.Popular
 
 /**
@@ -24,6 +25,7 @@ object Destination {
     const val Local = "Local"
     const val DetalleProducto = "DetalleProducto"
     const val Popular = "Popular"
+    const val Perfil = "Perfil"
     const val HomeLigaFutbol = "PerfilUsuario"
 }
 
@@ -55,6 +57,10 @@ class Actions(navController: NavHostController) {
 
     val openPopular: ()->Unit={
         navController.navigate(Popular)
+    }
+
+    val openPerfil: () -> Unit = {
+        navController.navigate(Perfil)
     }
 
     val openLigaFutbol: ()->Unit={

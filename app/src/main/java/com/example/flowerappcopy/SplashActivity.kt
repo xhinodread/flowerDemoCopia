@@ -36,7 +36,10 @@ class SplashActivity : AppCompatActivity() {
             LaunchedEffect(key1 = true) {
                 CoroutineScope(Dispatchers.Main).launch {
                     delay(SplashWaitTime)
-                    val intent = Intent(this@SplashActivity, MainActivity::class.java)
+                    //val intent = Intent(this@SplashActivity, MainActivity::class.java)
+                    ///val intent = Intent(this@SplashActivity, AlarmaMensajeActivity::class.java)
+                    val intent = Intent(this@SplashActivity, TextUiActivity::class.java)
+
                     //intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
                     startActivity(intent)
                     finish()

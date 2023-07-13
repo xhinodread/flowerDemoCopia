@@ -1,6 +1,7 @@
 package com.example.flowerappcopy.ui.screen
 
 import android.annotation.SuppressLint
+import android.os.Build
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -58,7 +59,9 @@ fun DashboardScreen(
                                     CarroDeCompras()
                                 }
                                 3 -> {
-                                    PerfilUsuario()
+                                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                                        PerfilUsuario()
+                                    }
                                 }
                             }
                         } //bodyContent()

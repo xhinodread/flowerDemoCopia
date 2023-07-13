@@ -1,6 +1,7 @@
 package com.example.flowerappcopy
 
 
+import android.os.Build
 import android.util.Log
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -54,6 +55,12 @@ fun ComposeApp() {
 
             composable(Destination.Popular) {
                 PupularScreen(actions.openProducto, actions.upPress)
+            }
+
+            composable(Destination.Perfil) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    PerfilUsuario()
+                }
             }
 
             composable(Destination.HomeLigaFutbol) {

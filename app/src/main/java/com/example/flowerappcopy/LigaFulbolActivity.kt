@@ -1,5 +1,6 @@
 package com.example.flowerappcopy
 
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
@@ -13,7 +14,9 @@ class LigaFulbolActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            PerfilUsuario()
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                PerfilUsuario()
+            }
         }
     }
 }
