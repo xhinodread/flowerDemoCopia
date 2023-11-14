@@ -15,6 +15,7 @@ import com.example.flowerappcopy.navigation.Actions
 import com.example.flowerappcopy.navigation.Destination
 import com.example.flowerappcopy.ui.screen.DashboardScreen
 import com.example.flowerappcopy.ui.screen.ElquiLigaFutbol
+import com.example.flowerappcopy.ui.screen.LocalScreen
 import com.example.flowerappcopy.ui.screen.LoginLigaFutbolScreen
 import com.example.flowerappcopy.ui.screen.LoginScreen
 import com.example.flowerappcopy.ui.screen.PupularScreen
@@ -29,7 +30,7 @@ fun ComposeApp() {
     val actions = remember(navController) { Actions(navController) }
 
     MaterialTheme {
-        NavHost(navController = navController, startDestination = Destination.Login) {
+        NavHost(navController = navController, startDestination = Destination.Local) {
 
             composable(Destination.Login) {
                 LoginScreen(actions.openDashboard)
@@ -66,6 +67,10 @@ fun ComposeApp() {
             composable(Destination.HomeLigaFutbol) {
                 //PerfilUsuario()
                 ElquiLigaFutbol()
+            }
+
+            composable(Destination.Local) {
+                LocalScreen()
             }
 
 

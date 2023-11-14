@@ -1,5 +1,6 @@
 package com.example.flowerappcopy.ui.screen.component
 
+import android.util.Log
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -10,20 +11,26 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Button
 import androidx.compose.material.Card
 import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.flowerappcopy.ui.viewmodel.MapaYayoGpsViewModel
 import com.google.android.gms.maps.LocationSource
 import com.google.android.gms.maps.StreetViewPanoramaOptions
 import com.google.android.gms.maps.model.BitmapDescriptor
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.compose.Circle
@@ -38,10 +45,15 @@ import com.google.maps.android.compose.rememberCameraPositionState
 import com.google.maps.android.compose.streetview.StreetView
 
 @Composable
-fun MapaLocal(){
+fun MapaLocal(
+    mapaYayoGpsViewModel: MapaYayoGpsViewModel = hiltViewModel()
+){
+    val posicion by mapaYayoGpsViewModel.mapaYayo.observeAsState()
+    //val markerPosVM = LatLng(posicion?.lat!!.toDouble(), posicion?.lon!!.toDouble())
+
     val markerPos = LatLng(-29.919313, -71.250570)
     val cameraPositionState = rememberCameraPositionState {
-        position = CameraPosition.fromLatLngZoom(markerPos, 12f)
+        position = CameraPosition.fromLatLngZoom(markerPos, 13f)
     }
 
     val listaMarker = listOf(
@@ -87,17 +99,41 @@ fun MapaLocal(){
                     .fillMaxSize()
             ){
                 Text("Donde estamos")
+                Button(
+                    onClick = {
+                        Log.d("CLick","click viewModel $posicion")
+                        mapaYayoGpsViewModel.getMapaUno()
+                    }
+                ) {
+                    Text("Mapa click")
+                }
+                Text("Ubicacion: $posicion")
                 GoogleMap(
                     modifier= Modifier.fillMaxSize(),
                     properties = MapProperties(mapType = MapType.HYBRID),
                     uiSettings = MapUiSettings(zoomControlsEnabled = true),
                     cameraPositionState = cameraPositionState
                 ){
+
                     Marker(
                         state= MarkerState( position=markerPos),
                         title = "Posicion",
                         snippet = "Estamos ubicados en la tierra",
                     )
+
+                    if(!posicion?.lat.isNullOrBlank()){
+                        Log.d("CLick","click if $posicion")
+                        Log.d("CLick","click if lat ${posicion?.lat!!.toDouble()}")
+                        Log.d("CLick","click if lon ${posicion?.lon!!.toDouble()}")
+                        Marker(
+                            state= MarkerState( position= LatLng(posicion?.lat!!.toDouble(), posicion?.lon!!.toDouble())),
+                            title = "Posicion X",
+                            snippet = "Estamos ubicados en la tierra",
+                            icon = (BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)),
+                            draggable = true,
+                        )
+                    }
+
                     Circle(
                         center = circleCenter,
                         strokeColor = MaterialTheme.colors.secondaryVariant,
@@ -105,7 +141,6 @@ fun MapaLocal(){
                     )
                     RecorridoMarker(listaMarker)
                 }
-                Spacer(Modifier.weight(1f))
             }
         }
     }

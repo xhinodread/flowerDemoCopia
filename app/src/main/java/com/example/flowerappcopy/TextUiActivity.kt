@@ -58,7 +58,7 @@ class TextUiActivity: ComponentActivity()  {
                         TopAppBar(
                             title = {
                                 Text(
-                                    text = "Text Recognition",
+                                    text = "Demo para Recognition de texto",
                                     modifier = Modifier.fillMaxWidth(),
                                     textAlign = TextAlign.Center
                                 )
